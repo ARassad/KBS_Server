@@ -37,7 +37,7 @@ class Request:
             else:
                 raise BaseException
         except:
-            print("Исключение при обработке запроса : {}".format(type(self)))
+            print("Исключение при обработке запроса : {}".format(type(self).__name__))
             dto.status = "Error"
         finally:
             cursor.close()
