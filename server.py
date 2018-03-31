@@ -7,7 +7,7 @@ from urllib.parse import parse_qs
 import json
 from Request import DataTransferObject
 from Autorization import Autorization
-
+from Registration import RegistrationUser
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -24,9 +24,8 @@ from Autorization import Autorization
 """
 
 api_methods_get, api_methods_post = {}, {}
-
-
-api_methods_post["Autorization"] = Autorization()
+api_methods_post["signUp"] = RegistrationUser()
+api_methods_post["signIn"] = Autorization()
 
 
 class HttpServer(BaseHTTPRequestHandler):
