@@ -28,6 +28,7 @@ class Request:
     def __call__(self, params):
 
         dto = DataTransferObject()
+        dto.status = "Succesful"
         cursor, connect = connect_database()
 
         try:
@@ -37,6 +38,7 @@ class Request:
                 raise BaseException
         except:
             print("Исключение при обработке запроса : {}".format(type(self)))
+            dto.status = "Error"
         finally:
             cursor.close()
             connect.close()

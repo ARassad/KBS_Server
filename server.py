@@ -5,7 +5,7 @@ from cgi import parse_header
 from cgi import parse_multipart
 from urllib.parse import parse_qs
 import json
-from Request import DataTransferObject, Request
+from Request import DataTransferObject
 
 """
     КАК СДЕЛАТЬ ЗАПРОС
@@ -19,7 +19,7 @@ from Request import DataTransferObject, Request
     также можно перегрузить verification_params для проверки параметров на корректность
     
     потом вставить получившееся обьект класса в соотвествующий словарь 
-    api_methods_get["testReq"] = TestReq()
+    api_methods_get["TestReq"] = TestReq()
 """
 
 api_methods_get, api_methods_post = {}, {}
@@ -39,7 +39,7 @@ class HttpServer(BaseHTTPRequestHandler):
             dct['id'] = int(dct['id'])
 
         mymethod = dct.get('method', None)
-        if mymethod is not None:
+        if mymethod is not None and api_methods_get.get(mymethod) is not None:
             value = api_methods_get[mymethod](dct)
             self.wfile.write(str.encode(value))
             print(value)
@@ -58,8 +58,8 @@ class HttpServer(BaseHTTPRequestHandler):
 
         mymethod = self.requestline[10:-9]
 
-        if mymethod is not None:
-            value = api_methods_get[mymethod](dct)
+        if mymethod is not None and api_methods_post.get(mymethod) is not None:
+            value = api_methods_post[mymethod](dct)
             self.wfile.write(str.encode(value))
             print(value)
         else:
