@@ -6,15 +6,16 @@ from cgi import parse_multipart
 from urllib.parse import parse_qs
 import json
 from Request import DataTransferObject
+from Autorization import Autorization
 
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
     
     class TestReq(Request):
-    @staticmethod
-    def request(cursor, params, dataTransferObject):
-        dataTransferObject.result = "HELLO"
+        @staticmethod
+        def request(cursor, params, dataTransferObject):
+            dataTransferObject.result = "HELLO"
     
     также можно перегрузить verification_params для проверки параметров на корректность
     
@@ -23,6 +24,9 @@ from Request import DataTransferObject
 """
 
 api_methods_get, api_methods_post = {}, {}
+
+
+api_methods_post["Autorization"] = Autorization()
 
 
 class HttpServer(BaseHTTPRequestHandler):
