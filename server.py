@@ -8,6 +8,7 @@ import json
 from Request import DataTransferObject
 from Autorization import Autorization
 from Registration import RegistrationUser
+from Messages import SendMessage, GetLastMessage
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -26,7 +27,9 @@ from Registration import RegistrationUser
 api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
+api_methods_post["sendMessage"] = SendMessage()
 
+api_methods_get["getLastMessage"] = GetLastMessage()
 
 class HttpServer(BaseHTTPRequestHandler):
     def _set_headers(self):
