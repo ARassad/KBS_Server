@@ -1,14 +1,15 @@
 from Request import Request
 
+
 class Storage:
     """
     
     """
     def __init__(self):
-        self.storage = {} #  {(from, to):[messages]}
+        self.storage = {}
 
     def sendMessage(self, from_, to, mes):
-        if self.storage.get((from_, to)) is not None:
+        if self.storage.get((from_, to)) is None:
             self.storage[(from_, to)] = [mes]
         else:
             self.storage[(from_, to)].append(mes)
@@ -28,7 +29,7 @@ class SendMessage(Request):
     @staticmethod
     def request(cursor, params, dataTransferObject):
         from_, to, mes = params["fromUser"], params["toUser"], params["message"]
-        messages.sendMessage(from_, to, mes)
+        SendMessage.messages.sendMessage(from_, to, mes)
 
 
 class GetLastMessage(Request):
@@ -37,4 +38,4 @@ class GetLastMessage(Request):
     @staticmethod
     def request(cursor, params, dataTransferObject):
         from_, to = params["fromUser"], params["toUser"]
-        dataTransferObject.message = messages.getLastMessage(from_, to)
+        dataTransferObject.message = GetLastMessage.messages.getLastMessage(from_, to)
