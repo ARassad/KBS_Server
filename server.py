@@ -8,7 +8,7 @@ import json
 from Request import DataTransferObject
 from Autorization import Autorization
 from Registration import RegistrationUser
-from Bribe import GetBribe, GetAllBribe, AgreeToBribe, ChangeSumBribe
+from Bribe import GetBribe, GetAllBribe, AgreeToBribe, ChangeSumBribe, GetDataBribe
 from GetDataCompany import GetDataCompany
 from GetDataSpecialist import GetDataSpecialist
 from GetDataDeputy import GetDataDeputy
@@ -31,6 +31,7 @@ api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
 
+api_methods_get["getDataBribe"] = GetDataBribe()
 api_methods_get["changeSumBribe"] = ChangeSumBribe()
 api_methods_get["agreeToBribe"] = AgreeToBribe()
 api_methods_get["getBribe"] = GetBribe()

@@ -76,3 +76,24 @@ class ChangeSumBribe(Request):
         cursor.execute("UPDATE Bride SET sum='{}' WHERE id={}".format(sum, bribeId))
 
         return
+
+
+class GetDataBribe(Request):
+
+    @staticmethod
+    def request(cursor, params, dataTransferObject):
+        bribeId = int(params["id"])
+
+        cursor.execute("SELECT * FROM Bride WHERE id={}".format(bribeId))
+        bribe = cursor.fetchone()
+
+        if bribe is not None:
+            dataTransferObject.id_company = bribe[1]
+            dataTransferObject.id_grafter = bribe[2]
+            dataTransferObject.type_grafter = bribe[3]
+            dataTransferObject.sum = bribe[4]
+            dataTransferObject.bribeStatus = bribe[5]
+
+            return
+
+        raise AttributeError
