@@ -19,6 +19,7 @@ from RejectCheck import RejectCheck
 from CompleteCheck import CompleteCheck
 from CreateCheck import CreateCheck
 from GetAllSpecialists import GetAllSpecialists
+from GetInterlocutors import GetInterlocutors
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -38,6 +39,7 @@ api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
 
+api_methods_get["getInterlocutors"] = GetInterlocutors()
 api_methods_get["getAllSpecialists"] = GetAllSpecialists()
 api_methods_get["createCheck"] = CreateCheck()
 api_methods_get["completeCheck"] = CompleteCheck()
