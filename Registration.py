@@ -24,14 +24,14 @@ class RegistrationUser(Request):
 
         if user_type == 0: # Спеиалист
             client_data = int(params["clientData"])
-            cursor.execute("insert into Specialist_User([name], id_login_info, type_specialist) values('{}', '{}', '{}')"
+            cursor.execute("insert into Specialist_User([name], id_login_info, type_specialist) values('{}', {}, {})"
                            .format(name, id_login_info, client_data))
         elif user_type == 1: # Депутат
             cursor.execute("insert into Deputy_User([name], id_login_info) values('{}', '{}')"
                            .format(name, id_login_info))
         elif user_type == 2: # Компания
             client_data = int(params["clientData"])
-            cursor.execute("insert into Specialist_User([name], id_login_info, type_specialist) values('{}', '{}', '{}')"
+            cursor.execute("insert into Company_User([name], id_login_info, product_type) values('{}', {}, {})"
                            .format(name, id_login_info, client_data))
         else:
             raise AttributeError
