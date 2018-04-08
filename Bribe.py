@@ -54,3 +54,15 @@ class GetAllBribe(Request):
             return
 
         raise AttributeError
+
+
+class AgreeToBribe(Request):
+
+    @staticmethod
+    def request(cursor, params, dataTransferObject):
+        bribeId = int(params["bribeId"])
+
+        cursor.execute("UPDATE Bride SET bribe_status='{}' WHERE id={}".format("completed", bribeId))
+
+        return
+
