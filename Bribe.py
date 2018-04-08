@@ -66,3 +66,13 @@ class AgreeToBribe(Request):
 
         return
 
+
+class ChangeSumBribe(Request):
+
+    @staticmethod
+    def request(cursor, params, dataTransferObject):
+        bribeId, sum = int(params["bribeId"]), int(params["sum"])
+
+        cursor.execute("UPDATE Bride SET sum='{}' WHERE id={}".format(sum, bribeId))
+
+        return
