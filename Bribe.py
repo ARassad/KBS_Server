@@ -28,9 +28,29 @@ class GetBribe(Request):
         raise AttributeError
 
 
-class GetLastMessage(Request):
+class GetAllBribe(Request):
 
     @staticmethod
     def request(cursor, params, dataTransferObject):
-        from_, to = params["fromUser"], params["toUser"]
-        dataTransferObject.message = GetLastMessage.messages.getLastMessage(from_, to)
+        user, type_user = params["userId"], int(params["typeUser"])
+
+        bribes = None
+
+        if type_user == 2:
+            cursor.execute("SELECT id FROM Bride WHERE id_company={} AND bribe_status='{}'".format(user, "inProgres"))
+            bribes = cursor.fetchall()
+            dataTransferObject.bribes = {}
+            for n, b in enumerate(bribes):
+                dataTransferObject.bribes[n] = b[0]
+            return
+
+        elif type_user == 0 or type_user == 1:
+            cursor.execute("SELECT id FROM Bride WHERE id_grafter={} AND bribe_status='{}' AND type_grafter={}"
+                           .format(user, "inProgres", type_user))
+            bribes = cursor.fetchall()
+            dataTransferObject.bribes = {}
+            for n, b in enumerate(bribes):
+                dataTransferObject.bribes[n] = b[0]
+            return
+
+        raise AttributeError
