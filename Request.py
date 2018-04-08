@@ -40,7 +40,7 @@ class Request:
                 self.request(cursor, params, dto)
             else:
                 raise BaseException
-        except StopIteration:
+        except:
             print("Исключение при обработке запроса : {}".format(type(self).__name__))
             dto.status = "Error"
         finally:

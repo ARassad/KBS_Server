@@ -88,12 +88,12 @@ class HttpServer(BaseHTTPRequestHandler):
         for key, val in postvars.items():
             mstr = key + val[0]
             param[key] = val[0]
-        #dct = json.loads(mstr)
+        dct = json.loads(mstr)
 
         mymethod = self.requestline[10:-9]
 
         if mymethod is not None and api_methods_post.get(mymethod) is not None:
-            value = api_methods_post[mymethod](param)
+            value = api_methods_post[mymethod](dct)
             self.wfile.write(str.encode(value))
             print(value)
         else:
