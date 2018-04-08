@@ -13,6 +13,7 @@ from GetDataCompany import GetDataCompany
 from GetDataSpecialist import GetDataSpecialist
 from GetDataDeputy import GetDataDeputy
 from GetCompanyCheckData import GetCompanyCheckData
+from CancelCheck import CancelCheck
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -32,6 +33,7 @@ api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
 
+api_methods_get["cancelCheck"] = CancelCheck()
 api_methods_get["getCompanyCheckData"] = GetCompanyCheckData()
 api_methods_get["getDataBribe"] = GetDataBribe()
 api_methods_get["changeSumBribe"] = ChangeSumBribe()
