@@ -11,6 +11,7 @@ from Registration import RegistrationUser
 from Messages import SendMessage, GetLastMessage
 from GetDataCompany import GetDataCompany
 from GetDataSpecialist import GetDataSpecialist
+from GetDataDeputy import GetDataDeputy
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -34,6 +35,7 @@ api_methods_post["sendMessage"] = SendMessage()
 api_methods_get["getLastMessage"] = GetLastMessage()
 api_methods_get["getDataCompany"] = GetDataCompany()
 api_methods_get["getDataSpecialist"] = GetDataSpecialist()
+api_methods_get["getDataDeputy"] = GetDataDeputy()
 
 
 class HttpServer(BaseHTTPRequestHandler):
