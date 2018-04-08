@@ -32,7 +32,7 @@ class Request:
     def __call__(self, params):
 
         dto = DataTransferObject()
-        dto.status = "Succesful"
+        dto.status = "Ok"
         cursor, connect = connect_database()
 
         try:
