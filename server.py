@@ -9,6 +9,7 @@ from Request import DataTransferObject
 from Autorization import Autorization
 from Registration import RegistrationUser
 from Messages import SendMessage, GetLastMessage
+from GetDataCompany import GetDataCompany
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -30,6 +31,8 @@ api_methods_post["signIn"] = Autorization()
 api_methods_post["sendMessage"] = SendMessage()
 
 api_methods_get["getLastMessage"] = GetLastMessage()
+api_methods_get["getDataCompany"] = GetDataCompany()
+
 
 class HttpServer(BaseHTTPRequestHandler):
     def _set_headers(self):
@@ -58,14 +61,16 @@ class HttpServer(BaseHTTPRequestHandler):
     def do_POST(self):
         self._set_headers()
         postvars = self.parse_POST()
+        param = {}
         for key, val in postvars.items():
             mstr = key + val[0]
-        dct = json.loads(mstr)
+            param[key] = val[0]
+        #dct = json.loads(mstr)
 
         mymethod = self.requestline[10:-9]
 
         if mymethod is not None and api_methods_post.get(mymethod) is not None:
-            value = api_methods_post[mymethod](dct)
+            value = api_methods_post[mymethod](param)
             self.wfile.write(str.encode(value))
             print(value)
         else:
