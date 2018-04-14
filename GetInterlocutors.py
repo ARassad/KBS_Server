@@ -66,13 +66,13 @@ class GetInterlocutors(Request):
                 cursor.execute("SELECT id, [name] FROM Deputy_User WHERE id = {}".format(specs[0]))
                 dep = cursor.fetchone()
 
-                res[float(str(dep[0]) + str(".0"))] = dep[1]
+                res[str(dep[0]) + str(".0")] = dep[1]
 
                 cursor.execute("SELECT id, [name] FROM Specialist_User WHERE id IN ({}, {}, {}) ".format(specs[1], specs[2], specs[3]))
                 specials = cursor.fetchall()
 
                 for s in specials:
-                    res[s[0]] = s[1]
+                    res[str(s[0])] = s[1]
 
                 return res
 
