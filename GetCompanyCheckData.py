@@ -9,7 +9,7 @@ class GetCompanyCheckData(Request):
         cursor.execute("SELECT id_last_exam FROM Company_User WHERE id = {}".format(companyId))
         row = cursor.fetchone()
 
-        if row is not None:
+        if row is not None and row[0] is not None:
             id_exam = row[0]
 
             cursor.execute("SELECT goods, sanitation, security, consumerRights, status FROM Examination WHERE id = {}"
