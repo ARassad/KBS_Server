@@ -6,7 +6,7 @@ class CompleteCheck(Request):
     def request(cursor, params, dataTransferObject):
         dataTransferObject.resultRequest = "False"
 
-        companyId, mark, characteristic = params["companyId"], params["mark"], params["characteristic"]
+        companyId, mark, characteristic, criteria = params["companyId"], params["mark"], params["characteristic"], params["criteria"]
 
         cursor.execute("SELECT id_current_exam FROM Company_User WHERE id = {}".format(companyId))
         row = cursor.fetchone()
@@ -14,9 +14,9 @@ class CompleteCheck(Request):
         if row is not None and row[0] is not None:
             id_current_exam = row[0]
 
-            if characteristic in ["goods", "sanitation", "security", "consumerRights"]:
+            if criteria in ["goods", "sanitation", "security", "consumerRights"]:
 
-                cursor.execute("UPDATE Examination SET {}={} WHERE id={}".format(characteristic, mark, id_current_exam))
+                cursor.execute("UPDATE Examination SET {}={}, about += '{}' WHERE id={}".format(criteria, mark, characteristic, id_current_exam))
 
                 dataTransferObject.resultRequest = "True"
                 return
