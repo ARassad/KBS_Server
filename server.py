@@ -20,6 +20,10 @@ from CompleteCheck import CompleteCheck
 from CreateCheck import CreateCheck
 from GetAllSpecialists import GetAllSpecialists
 from GetInterlocutors import GetInterlocutors
+from GetNewCheck import GetNewCheck
+from GetCheckInProgress import GetCheckInProgress
+from GetCheckCompleted import GetCheckCompleted
+
 """
     КАК СДЕЛАТЬ ЗАПРОС
     Наследуемся от Request и перегружаем request
@@ -39,6 +43,9 @@ api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
 
+api_methods_get["getCheckCompleted"] = GetCheckCompleted()
+api_methods_get["getCheckInProgress"] = GetCheckInProgress()
+api_methods_get["getNewCheck"] = GetNewCheck()
 api_methods_get["getInterlocutors"] = GetInterlocutors()
 api_methods_get["getAllSpecialists"] = GetAllSpecialists()
 api_methods_get["createCheck"] = CreateCheck()
