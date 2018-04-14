@@ -8,7 +8,7 @@ class CreateCheck(Request):
 
         companyId, deputyId, doctorId, policeId, doomId = params["companyId"], params["deputyId"], params["doctorId"], params["policeId"], params["doomId"]
 
-        cursor.execute("INSERT INTO Examination(id_company, id_deputy, id_duma_specialist, id_doctor, id_policeman, status) OUTPUT INSERTED.id VALUES ({}, {}, {}, {}, {}, '{}')"
+        cursor.execute("INSERT INTO Examination(id_company, id_deputy, id_duma_specialist, id_doctor, id_policeman, status, about) OUTPUT INSERTED.id VALUES ({}, {}, {}, {}, {}, '{}', ' ')"
                         .format(companyId, deputyId, doomId, doctorId, policeId, "inProgres"))
 
         row = cursor.fetchone()
