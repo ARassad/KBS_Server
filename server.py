@@ -23,6 +23,7 @@ from GetInterlocutors import GetInterlocutors
 from GetNewCheck import GetNewCheck
 from GetCheckInProgress import GetCheckInProgress
 from GetCheckCompleted import GetCheckCompleted
+from GetCompanyCheckDataInProgres import GetCompanyCheckDataInProgres
 
 """
     КАК СДЕЛАТЬ ЗАПРОС
@@ -43,6 +44,7 @@ api_methods_get, api_methods_post = {}, {}
 api_methods_post["signUp"] = RegistrationUser()
 api_methods_post["signIn"] = Autorization()
 
+api_methods_get["getCompanyCheckDataInProgres"] = GetCompanyCheckDataInProgres()
 api_methods_get["getCheckCompleted"] = GetCheckCompleted()
 api_methods_get["getCheckInProgress"] = GetCheckInProgress()
 api_methods_get["getNewCheck"] = GetNewCheck()
