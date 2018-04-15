@@ -4,6 +4,7 @@ from Request import Request
 class CancelCheck(Request):
     @staticmethod
     def request(cursor, params, dataTransferObject):
+        dataTransferObject.resultRequest = "False"
         companyId = int(params["companyId"])
 
         cursor.execute("SELECT id_current_exam FROM Company_User WHERE id = {}".format(companyId))
@@ -15,6 +16,8 @@ class CancelCheck(Request):
             cursor.execute("UPDATE Company_User SET id_current_exam={} WHERE id = {}".format("null", companyId))
 
             cursor.execute("UPDATE Examination SET status ='{}' WHERE id = {}".format("canceled", id_current_exam))
+
+            dataTransferObject.resultRequest = "True"
 
             return
 
