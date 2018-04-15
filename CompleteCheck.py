@@ -18,7 +18,22 @@ class CompleteCheck(Request):
 
                 cursor.execute("UPDATE Examination SET {}={}, about += '{}' WHERE id={}".format(criteria, mark, characteristic, id_current_exam))
 
+                CompleteCheck.__culc_sum_crit(cursor, id_current_exam)
+
                 dataTransferObject.resultRequest = "True"
                 return
 
         raise AttributeError
+
+    @staticmethod
+    def __culc_sum_crit(cursor, exam_id):
+        cursor.execute("SELECT goods, sanitation, security FROM Examination WHERE id = {}".format(exam_id))
+        row = cursor.fetchone()
+
+        if row is not None:
+            criteria = [c if c is not None else 0 for c in row]
+
+            sum_crit = sum(criteria) // len(criteria)
+
+            cursor.execute("UPDATE Examination SET consumerRights = {} WHERE id = {}".format(sum_crit, exam_id))
+
