@@ -10,7 +10,7 @@ class GetNewCheck(Request):
         dataTransferObject.companyId = ""
         dataTransferObject.companyName = ""
 
-        cursor.execute("SELECT id, [name] FROM Company_User WHERE id_current_exam IN (SELECT id FROM Examination WHERE id_duma_specialist = {id} OR id_doctor = {id} OR id_policeman = {id})"
+        cursor.execute("SELECT id, [name] FROM Company_User WHERE id_current_exam IN (SELECT id FROM Examination WHERE id_duma_specialist = {id} OR id_doctor = {id} OR id_policeman = {id} AND status='inProgres')"
                        .format(id=specId))
         company = cursor.fetchone()
 
