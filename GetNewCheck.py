@@ -10,7 +10,7 @@ class GetNewCheck(Request):
         dataTransferObject.companyId = ""
         dataTransferObject.companyName = ""
 
-        cursor.execute("SELECT id, [name] FROM Company_User WHERE id_current_exam IN (SELECT id FROM Examination WHERE id_duma_specialist = {id} OR id_doctor = {id} OR id_policeman = {id} AND status='inProgres')"
+        cursor.execute("SELECT Company_User.id, [name], X.id FROM Company_User INNER JOIN (SELECT id FROM Examination WHERE (id_duma_specialist = {id} OR id_doctor = {id} OR id_policeman = {id}) AND status='inProgres') X ON id_current_exam = X.id"
                        .format(id=specId))
         company = cursor.fetchone()
 
@@ -21,7 +21,7 @@ class GetNewCheck(Request):
             types = ["id_doctor", "id_policeman", "id_duma_specialist"]
             type_crit = ["goods", "security", "sanitation"]
 
-            cursor.execute("SELECT {} FROM Examination WHERE {} = {} AND id_company = {} ".format(type_crit[type], types[type], specId, company[0]))
+            cursor.execute("SELECT {} FROM Examination WHERE {} = {} AND id = {} ".format(type_crit[type], types[type], specId, company[2]))
             row = cursor.fetchone()
             if row is not None and row[0] is not None:
                 return
