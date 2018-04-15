@@ -16,7 +16,7 @@ class RejectCheck(Request):
 
             cursor.execute("UPDATE Examination SET goods=null, sanitation=null, security=null, consumerRights=null, status ='{}' WHERE id = {}".format("inProgres", id_current_exam))
 
-            cursor.execute("UPDATE Company_User SET id_current_exam={}, id_last_exam=null WHERE id = {}".format(id_current_exam, companyId))
+            #cursor.execute("UPDATE Company_User SET id_current_exam={}, id_last_exam=null WHERE id = {}".format(id_current_exam, companyId))
 
             dataTransferObject.resultRequest = "True"
             return
