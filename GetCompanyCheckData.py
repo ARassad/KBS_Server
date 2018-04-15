@@ -12,7 +12,7 @@ class GetCompanyCheckData(Request):
         if row is not None and row[0] is not None:
             id_exam = row[0]
 
-            cursor.execute("SELECT goods, sanitation, security, consumerRights, characteristic FROM Examination WHERE id = {}"
+            cursor.execute("SELECT goods, sanitation, security, consumerRights, about FROM Examination WHERE id = {}"
                            .format(id_exam))
             exam = cursor.fetchone()
 
