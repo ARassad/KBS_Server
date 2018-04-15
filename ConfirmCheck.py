@@ -4,6 +4,7 @@ from Request import Request
 class ConfirmCheck(Request):
     @staticmethod
     def request(cursor, params, dataTransferObject):
+        dataTransferObject.resultRequest = "False"
         companyId = int(params["companyId"])
 
         cursor.execute("SELECT id_current_exam FROM Company_User WHERE id = {}".format(companyId))
@@ -19,6 +20,8 @@ class ConfirmCheck(Request):
                 cursor.execute("UPDATE Examination SET status ='{}' WHERE id = {}".format("confirmed", id_current_exam))
 
                 cursor.execute("UPDATE Company_User SET id_last_exam={}, id_current_exam=null WHERE id = {}".format(id_current_exam, companyId))
+
+                dataTransferObject.resultRequest = "True"
 
                 return
 
