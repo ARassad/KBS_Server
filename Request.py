@@ -15,7 +15,7 @@ def connect_database():
     connect_string = 'DRIVER={};PORT=1433;SERVER={};PORT=1443;DATABASE={};UID={};PWD={}'.format\
         (driver, server, database, username, password)
 
-    connect_string = "Driver={ODBC Driver 13 for SQL Server};Server=MSI;Trusted_Connection=Yes;Database=KBS;"
+    connect_string = "Driver={ODBC Driver 13 for SQL Server};Server=ALEX\SQLEXPRESS;Trusted_Connection=Yes;Database=KBS_Release_2;"
 
     cnxn = pyodbc.connect(connect_string, autocommit=True)
     cursor = cnxn.cursor()
